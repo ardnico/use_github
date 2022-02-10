@@ -1,0 +1,3 @@
+requests>=2.0
+PyGithub>=1.54
+pandas>=1.3.3
