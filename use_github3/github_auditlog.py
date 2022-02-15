@@ -154,7 +154,6 @@ class Audit(Use_github):
         tmp_df.to_csv(csv_name,index=False,encoding="shift_jis")
         filepath = f"{log_dir}/{csv_name}"
         self.add_update_file(filepath,csv_name,encoding="shift_jis")
-        os.remove(csv_name)
         tmp_df = tmp_df[tmp_df['public_repos']>0]
         return len(tmp_df)
     
