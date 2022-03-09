@@ -15,7 +15,7 @@ class Use_github(object):
         if 'token' in kwargs:
             token = kwargs['token']
         elif 'enc_token' in kwargs:
-            token = enc.decrypt(kwargs['token'])
+            token = enc.decrypt(kwargs['enc_token'])
         else:
             if os.path.exists(r"data\token_key"):
                 with open(r"data\token_key",mode="r") as f:
@@ -26,9 +26,13 @@ class Use_github(object):
                 with open(fr"data\token_key",mode="w") as f:
                     tmp_key = enc.encode(token)
                     f.write(tmp_key)
+        if 'target_organizations' in kwargs:
+            self.target_organization = kwargs['target_organizations'].split(",")
+        else:
+            self.target_organization = self.get_target_organization()
         self.enc_token = enc.encode(token)
         self.g = gh(token)
-        self.target_organization = self.get_target_organization()
+        
     
     def set_org(
         self,

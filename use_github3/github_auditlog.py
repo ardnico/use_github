@@ -202,7 +202,7 @@ class Audit(Use_github):
             self.get_eventlog(tmp_org)
             err_num += tmp_num
         if err_num > 0:
-            print("MemberListに不審な点あり")
+            print("There are some suspicious point in the MemberList")
         return err_num
     
     def get_auditlog(
@@ -210,7 +210,7 @@ class Audit(Use_github):
         oname:str,
         log_dir="AuditLog"
     ):
-        print(f"{oname} Auditlog取得開始")
+        print(f"{oname} start to get the Auditlog")
         logname = f"auditlog_{oname}.csv"
         filepath = f"{log_dir}/{logname}"
         param = {
@@ -265,7 +265,7 @@ class Audit(Use_github):
         self.get_accesslog(oname,log_dir)
         rnum = self.extract_data(oname,df,log_dir)
         if rnum > 0:
-            print("Organization上に変更あり")
+            print("There are some changes in these Organizations")
         return rnum
     
     def extract_data(
@@ -288,7 +288,7 @@ class Audit(Use_github):
         for exkey in exclude_key:
             tmp_df = tmp_df[~tmp_df['action'].str.contains(exkey)]
         if len(tmp_df) > 0:
-            print("Organizationの設定が変更された可能性があります")
+            print("There may be some changes in the Organization's Settings")
             tmp_df.to_csv(logname)
             self.add_update_file(filepath,logname)
             
